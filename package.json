@@ -1,0 +1,32 @@
+{
+    "name":        "microkernel-mod-daemon",
+    "version":     "0.9.0",
+    "description": "Microkernel module for daemonizing the server application",
+    "keywords": [
+        "microkernel", "module", "daemon"
+    ],
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/rse/microkernel-mod-daemon.git"
+    },
+    "author": {
+        "name":  "Ralf S. Engelschall",
+        "email": "rse@engelschall.com",
+        "url":   "http://engelschall.com"
+    },
+    "license":  "MIT",
+    "homepage": "https://github.com/rse/microkernel-mod-daemon",
+    "bugs":     "https://github.com/rse/microkernel-mod-daemon/issues",
+    "dependencies": {
+        "sprintfjs":            "~1.2.2",
+        "daemonize.redux":      "~0.0.1"
+    },
+    "peerDependencies": {
+        "microkernel":          "*",
+        "microkernel-options":  "*"
+    },
+    "scripts": {
+        "prepublish": "jshint microkernel-mod-daemon.js && babel --presets es2015 microkernel-mod-daemon.js >microkernel-mod-daemon.js5"
+    },
+    "main": "microkernel-mod-daemon.js5"
+}
