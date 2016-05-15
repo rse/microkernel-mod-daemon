@@ -23,6 +23,7 @@ Usage
 
 ```shell
 $ npm install microkernel
+$ npm install microkernel-mod-ctx microkernel-mod-options
 $ npm install microkernel-mod-daemon
 ```
 

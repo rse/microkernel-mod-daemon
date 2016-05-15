@@ -30,7 +30,7 @@ export default class Module {
     get module () {
         /*  publish module information  */
         return {
-            name:  "microkernel-daemon",
+            name:  "microkernel-mod-daemon",
             tag:   "DAEMON",
             group: "BOOT",
             after: [ "CTX", "OPTIONS" ]
