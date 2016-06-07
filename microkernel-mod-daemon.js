@@ -87,7 +87,7 @@ export default class Module {
             /*  ensure daemon is still not running  */
             if (pid !== 0) {
                 console.log(sprintf("%s: ERROR: already running as daemon under PID %d",
-                    kernel.rs("ctx:program").name, pid))
+                    kernel.rs("ctx:program"), pid))
                 process.exit(1)
             }
 
@@ -97,12 +97,12 @@ export default class Module {
             return new Promise((/* resolve, reject */) => {
                 daemon.on("error", (err) => {
                     console.log(sprintf("%s: ERROR: error during daemonizing: %s",
-                        kernel.rs("ctx:program").name, err))
+                        kernel.rs("ctx:program"), err))
                     process.exit(1)
                 })
                 daemon.on("started", (pid2) => {
                     console.log(sprintf("%s: OK: daemonized (PID: %d)",
-                        kernel.rs("ctx:program").name, pid2))
+                        kernel.rs("ctx:program"), pid2))
                     process.exit(0)
                 })
                 daemon.start()
@@ -111,7 +111,7 @@ export default class Module {
         else if (kernel.rs("options:options").daemon_kill) {
             /*  ensure daemon is already running  */
             if (pid === 0) {
-                console.log(sprintf("%s: ERROR: daemon not running", kernel.rs("ctx:program").name))
+                console.log(sprintf("%s: ERROR: daemon not running", kernel.rs("ctx:program")))
                 process.exit(1)
             }
 
@@ -121,12 +121,12 @@ export default class Module {
             return new Promise((/* resolve, reject */) => {
                 daemon.on("error", (err) => {
                     console.log(sprintf("%s: ERROR: error during daemon killing: %s",
-                        kernel.rs("ctx:program").name, err))
+                        kernel.rs("ctx:program"), err))
                     process.exit(1)
                 })
                 daemon.on("stopped", (pid2) => {
                     console.log(sprintf("%s: OK: daemon killed (PID: %d)",
-                        kernel.rs("ctx:program").name, pid2))
+                        kernel.rs("ctx:program"), pid2))
                     process.exit(0)
                 })
                 daemon.kill()
