@@ -18,8 +18,16 @@
     "homepage": "https://github.com/rse/microkernel-mod-daemon",
     "bugs":     "https://github.com/rse/microkernel-mod-daemon/issues",
     "dependencies": {
-        "sprintfjs":                "~1.2.2",
+        "bluebird":                 "~3.4.6",
+        "sprintfjs":                "~1.2.3",
         "daemonize.redux":          "~0.0.1"
+    },
+    "devDependencies": {
+        "babel-cli":                "~6.14.0",
+        "babel":                    "~6.5.2",
+        "babel-preset-es2015":      "~6.14.0",
+        "babel-eslint":             "~6.1.2",
+        "eslint":                   "~3.6.0"
     },
     "peerDependencies": {
         "microkernel":              "*",
@@ -27,7 +35,7 @@
         "microkernel-mod-options":  "*"
     },
     "scripts": {
-        "prepublish": "jshint microkernel-mod-daemon.js && babel --presets es2015 microkernel-mod-daemon.js >microkernel-mod-daemon.js5"
+        "prepublish": "eslint --config eslint.json microkernel-mod-daemon.js && babel --presets es2015 microkernel-mod-daemon.js >microkernel-mod-daemon.js5"
     },
     "main": "microkernel-mod-daemon.js5"
 }

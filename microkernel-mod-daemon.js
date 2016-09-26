@@ -22,10 +22,12 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Promise   from "bluebird"
 import path      from "path"
 import sprintf   from "sprintfjs"
 import daemonize from "daemonize.redux"
 
+/* eslint no-console: 0 */
 export default class Module {
     get module () {
         /*  publish module information  */
