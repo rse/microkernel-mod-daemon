@@ -45,13 +45,13 @@ class Module {
         kernel.latch("options:options", (options) => {
             options.push(
                 { names: [ "daemon" ], type: "bool", "default": false,
-                  help: "Run as a daemon (detached from terminal)" })
+                    help: "Run as a daemon (detached from terminal)" })
             options.push(
                 { names: [ "daemon-kill" ], type: "bool", "default": false,
-                  help: "Kill daemon process" })
+                    help: "Kill daemon process" })
             options.push(
                 { names: [ "daemon-pidfile" ], type: "string", "default": pidfile,
-                  help: "Path to PID file for daemon operation", helpArg: "PATH" })
+                    help: "Path to PID file for daemon operation", helpArg: "PATH" })
         })
     }
     start (kernel) {
