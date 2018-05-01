@@ -18,23 +18,30 @@
     "homepage": "https://github.com/rse/microkernel-mod-daemon",
     "bugs":     "https://github.com/rse/microkernel-mod-daemon/issues",
     "dependencies": {
-        "bluebird":                 "~3.5.1",
-        "sprintfjs":                "~1.2.9",
-        "daemonize.redux":          "~0.0.1"
+        "sprintfjs":                "1.2.9",
+        "daemonize.redux":          "0.0.1"
     },
     "devDependencies": {
-        "babel-cli":                "~6.26.0",
-        "babel-preset-es2015":      "~6.24.1",
-        "babel-eslint":             "~8.2.3",
-        "eslint":                   "~4.19.1"
+        "babel-cli":                "6.26.0",
+        "babel-preset-es2015":      "6.24.1",
+        "babel-eslint":             "8.2.3",
+        "eslint":                   "4.19.1",
+        "eslint-config-standard":   "11.0.0",
+        "eslint-plugin-standard":   "3.1.0",
+        "eslint-plugin-promise":    "3.7.0",
+        "eslint-plugin-import":     "2.11.0",
+        "eslint-plugin-node":       "6.0.1"
     },
     "peerDependencies": {
         "microkernel":              "*",
         "microkernel-mod-ctx":      "*",
         "microkernel-mod-options":  "*"
     },
-    "scripts": {
-        "prepublish": "eslint --config eslint.json microkernel-mod-daemon.js && babel --presets es2015 microkernel-mod-daemon.js >microkernel-mod-daemon.js5"
+    "engines": {
+        "node":                     ">=8.0.0"
     },
-    "main": "microkernel-mod-daemon.js5"
+    "scripts": {
+        "prepublishOnly": "eslint --config eslint.yaml microkernel-mod-daemon.js"
+    },
+    "main": "microkernel-mod-daemon.js"
 }

@@ -1,6 +1,6 @@
 /*
 **  Microkernel -- Microkernel for Server Applications
-**  Copyright (c) 2015-2016 Ralf S. Engelschall <rse@engelschall.com>
+**  Copyright (c) 2016-2018 Ralf S. Engelschall <rse@engelschall.com>
 **
 **  Permission is hereby granted, free of charge, to any person obtaining
 **  a copy of this software and associated documentation files (the
@@ -22,13 +22,14 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Promise   from "bluebird"
-import path      from "path"
-import sprintf   from "sprintfjs"
-import daemonize from "daemonize.redux"
+/*  external requirements  */
+const path      = require("path")
+const sprintf   = require("sprintfjs")
+const daemonize = require("daemonize.redux")
 
+/*  the Microkernel module  */
 /* eslint no-console: 0 */
-export default class Module {
+class Module {
     get module () {
         /*  publish module information  */
         return {
@@ -136,4 +137,7 @@ export default class Module {
         }
     }
 }
+
+/*  export the Microkernel module  */
+module.exports = Module
 
