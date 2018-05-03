@@ -89,8 +89,9 @@ class Module {
         if (kernel.rs("options:options").daemon) {
             /*  ensure daemon is still not running  */
             if (pid !== 0) {
-                console.log(sprintf("%s: ERROR: already running as daemon under PID %d",
-                    kernel.rs("ctx:program"), pid))
+                let msg = sprintf("already running as daemon under PID %d", pid)
+                kernel.sv("log", "daemon", "error", msg)
+                console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                 process.exit(1)
             }
 
@@ -99,13 +100,15 @@ class Module {
                 of the whole application until we terminate it ourself here)  */
             return new Promise((/* resolve, reject */) => {
                 daemon.on("error", (err) => {
-                    console.log(sprintf("%s: ERROR: error during daemonizing: %s",
-                        kernel.rs("ctx:program"), err))
+                    let msg = sprintf("error during daemonizing: %s", err)
+                    kernel.sv("log", "daemon", "error", msg)
+                    console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                     process.exit(1)
                 })
                 daemon.on("started", (pid2) => {
-                    console.log(sprintf("%s: OK: daemonized (PID: %d)",
-                        kernel.rs("ctx:program"), pid2))
+                    let msg = sprintf("daemonized (PID: %d)", pid2)
+                    kernel.sv("log", "daemon", "info", msg)
+                    console.log(sprintf("%s: OK: %s", kernel.rs("ctx:program"), msg))
                     process.exit(0)
                 })
                 daemon.start()
@@ -114,7 +117,9 @@ class Module {
         else if (kernel.rs("options:options").daemon_kill) {
             /*  ensure daemon is already running  */
             if (pid === 0) {
-                console.log(sprintf("%s: ERROR: daemon not running", kernel.rs("ctx:program")))
+                let msg = "daemon not running"
+                kernel.sv("log", "daemon", "error", msg)
+                console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program", msg)))
                 process.exit(1)
             }
 
@@ -123,13 +128,15 @@ class Module {
                 of the whole application until we terminate it ourself here)  */
             return new Promise((/* resolve, reject */) => {
                 daemon.on("error", (err) => {
-                    console.log(sprintf("%s: ERROR: error during daemon killing: %s",
-                        kernel.rs("ctx:program"), err))
+                    let msg = sprintf("error during daemon killing: %s", err)
+                    kernel.sv("log", "daemon", "error", msg)
+                    console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                     process.exit(1)
                 })
                 daemon.on("stopped", (pid2) => {
-                    console.log(sprintf("%s: OK: daemon killed (PID: %d)",
-                        kernel.rs("ctx:program"), pid2))
+                    let msg = sprintf("daemon killed (PID: %d)", pid2)
+                    kernel.sv("log", "daemon", "info", msg)
+                    console.log(sprintf("%s: OK: %s", kernel.rs("ctx:program"), msg))
                     process.exit(0)
                 })
                 daemon.kill()
