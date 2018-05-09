@@ -119,7 +119,7 @@ class Module {
             if (pid === 0) {
                 let msg = "daemon not running"
                 kernel.sv("log", "daemon", "error", msg)
-                console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program", msg)))
+                console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                 process.exit(1)
             }
 
