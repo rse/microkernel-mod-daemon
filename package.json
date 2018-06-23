@@ -18,16 +18,16 @@
     "homepage": "https://github.com/rse/microkernel-mod-daemon",
     "bugs":     "https://github.com/rse/microkernel-mod-daemon/issues",
     "dependencies": {
-        "sprintfjs":                "1.2.9",
+        "sprintfjs":                "1.2.10",
         "daemonize.redux":          "0.0.1"
     },
     "devDependencies": {
-        "babel-eslint":             "8.2.3",
-        "eslint":                   "4.19.1",
+        "babel-eslint":             "8.2.5",
+        "eslint":                   "5.0.0",
         "eslint-config-standard":   "11.0.0",
         "eslint-plugin-standard":   "3.1.0",
-        "eslint-plugin-promise":    "3.7.0",
-        "eslint-plugin-import":     "2.11.0",
+        "eslint-plugin-promise":    "3.8.0",
+        "eslint-plugin-import":     "2.12.0",
         "eslint-plugin-node":       "6.0.1"
     },
     "peerDependencies": {
