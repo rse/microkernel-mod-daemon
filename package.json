@@ -1,6 +1,6 @@
 {
     "name":        "microkernel-mod-daemon",
-    "version":     "0.9.13",
+    "version":     "0.9.14",
     "description": "Microkernel module for daemonizing the server application",
     "keywords": [
         "microkernel", "module", "daemon"
