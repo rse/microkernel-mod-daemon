@@ -64,4 +64,7 @@ rules:
     space-in-parens:                     off
     no-unneeded-ternary:                 off
     no-extra-bind:                       off
+    lines-between-class-members:         off
+    object-curly-newline:                off
+    array-bracket-spacing:               off
 

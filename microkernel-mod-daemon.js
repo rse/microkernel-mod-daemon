@@ -41,17 +41,20 @@ class Module {
     }
     latch (kernel) {
         /*  provide command-line options  */
-        let pidfile = path.join(kernel.rs("ctx:basedir"), kernel.rs("ctx:program") + ".pid")
+        const pidfile = path.join(kernel.rs("ctx:basedir"), kernel.rs("ctx:program") + ".pid")
         kernel.latch("options:options", (options) => {
-            options.push(
-                { names: [ "daemon" ], type: "bool", "default": false,
-                    help: "Run as a daemon (detached from terminal)" })
-            options.push(
-                { names: [ "daemon-kill" ], type: "bool", "default": false,
-                    help: "Kill daemon process" })
-            options.push(
-                { names: [ "daemon-pidfile" ], type: "string", "default": pidfile,
-                    help: "Path to PID file for daemon operation", helpArg: "PATH" })
+            options.push({
+                names: [ "daemon" ], type: "bool", default: false,
+                help: "Run as a daemon (detached from terminal)"
+            })
+            options.push({
+                names: [ "daemon-kill" ], type: "bool", default: false,
+                help: "Kill daemon process"
+            })
+            options.push({
+                names: [ "daemon-pidfile" ], type: "string", default: pidfile,
+                help: "Path to PID file for daemon operation", helpArg: "PATH"
+            })
         })
     }
     start (kernel) {
@@ -60,16 +63,16 @@ class Module {
             return
 
         /*  determine absolute path to ourself  */
-        let script = path.resolve(process.argv[1])
+        const script = path.resolve(process.argv[1])
 
         /*  provide arguments without the --daemon option
             (to prevent a recursive behaviour)  */
-        let argv = process.argv
+        const argv = process.argv
             .filter((arg /*, idx, arr */) => (arg !== "--daemon"))
             .slice(2)
 
         /*  setup the daemonization  */
-        let daemon = daemonize.setup({
+        const daemon = daemonize.setup({
             args:        [],
             main:        script,
             name:        script,
@@ -83,13 +86,13 @@ class Module {
         })
 
         /*  determine daemon status  */
-        let pid = daemon.status()
+        const pid = daemon.status()
 
         /*  start or stop daemon  */
         if (kernel.rs("options:options").daemon) {
             /*  ensure daemon is still not running  */
             if (pid !== 0) {
-                let msg = sprintf("already running as daemon under PID %d", pid)
+                const msg = sprintf("already running as daemon under PID %d", pid)
                 kernel.sv("log", "daemon", "error", msg)
                 console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                 process.exit(1)
@@ -100,13 +103,13 @@ class Module {
                 of the whole application until we terminate it ourself here)  */
             return new Promise((/* resolve, reject */) => {
                 daemon.on("error", (err) => {
-                    let msg = sprintf("error during daemonizing: %s", err)
+                    const msg = sprintf("error during daemonizing: %s", err)
                     kernel.sv("log", "daemon", "error", msg)
                     console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                     process.exit(1)
                 })
                 daemon.on("started", (pid2) => {
-                    let msg = sprintf("daemonized (PID: %d)", pid2)
+                    const msg = sprintf("daemonized (PID: %d)", pid2)
                     kernel.sv("log", "daemon", "info", msg)
                     console.log(sprintf("%s: OK: %s", kernel.rs("ctx:program"), msg))
                     process.exit(0)
@@ -117,7 +120,7 @@ class Module {
         else if (kernel.rs("options:options").daemon_kill) {
             /*  ensure daemon is already running  */
             if (pid === 0) {
-                let msg = "daemon not running"
+                const msg = "daemon not running"
                 kernel.sv("log", "daemon", "error", msg)
                 console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                 process.exit(1)
@@ -128,13 +131,13 @@ class Module {
                 of the whole application until we terminate it ourself here)  */
             return new Promise((/* resolve, reject */) => {
                 daemon.on("error", (err) => {
-                    let msg = sprintf("error during daemon killing: %s", err)
+                    const msg = sprintf("error during daemon killing: %s", err)
                     kernel.sv("log", "daemon", "error", msg)
                     console.log(sprintf("%s: ERROR: %s", kernel.rs("ctx:program"), msg))
                     process.exit(1)
                 })
                 daemon.on("stopped", (pid2) => {
-                    let msg = sprintf("daemon killed (PID: %d)", pid2)
+                    const msg = sprintf("daemon killed (PID: %d)", pid2)
                     kernel.sv("log", "daemon", "info", msg)
                     console.log(sprintf("%s: OK: %s", kernel.rs("ctx:program"), msg))
                     process.exit(0)
